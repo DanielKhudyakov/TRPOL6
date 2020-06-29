@@ -1,10 +1,14 @@
-  
-branches:
-  only:
-  - master
-  - dev
-import:
-- source: .travis/masterTest.yml
-  if: branch = master
-- source: .travis/devTest.yml
-  if: branch = dev
+language: python
+puthon: 3.8
+script: 
+  - cd PythonApplication1
+  - pytest
+  - cd ..
+deploy:
+  provider: releases
+  pre-release: true
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true
+  on:
+    repo: DanielKhudyakov/TRPOL6
+    branch: dev
