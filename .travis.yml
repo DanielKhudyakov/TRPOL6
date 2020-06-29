@@ -1,13 +1,14 @@
 language: python
 puthon: 3.8
-script:
-echo Starting work...
-branches:
-  only:
-  - master
-  - dev
-import:
-- source: .travis/masterTest.yml
-  if: branch = master
-- source: .travis/devTest.yml
-  if: branch = dev
+script: 
+  - cd PythonApplication1
+  - pytest
+  - cd ..
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true
+  on:
+    repo: DanielKhudyakov/TRPOL6
+    branch: master
+    tags: true
